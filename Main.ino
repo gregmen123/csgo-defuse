@@ -7,7 +7,7 @@ int delayTime = 1000;
 
 void setup() {
   pinMode(defusePin, INPUT);
-  pinMode(ledPins[0], OUTPUT);
+  pinMode(ledPins[0], OUTPUT); // For example, this is the same as previously saying pinMode(redLed1, OUTPUT)
   pinMode(ledPins[1], OUTPUT);
   pinMode(ledPins[2], OUTPUT);
   pinMode(ledPins[3], OUTPUT);
