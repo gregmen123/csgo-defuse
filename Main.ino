@@ -1,35 +1,53 @@
-int redLed1 = 13;
-int redLed2 = 12;
-int amberLed1 = 11;
-int amberLed2 = 10;
-int greenLed = 9;
-int defuse = 0;
+int[] ledPins = [13, 12, 11, 10, 9];
+//  represents:  r1  r2  a1  a2 g1
+// how to use: instead of pinMode(red1, OUTPUT) (for example), use pinMode(ledPins[0])
+int defusePin = 0;
 int delayTime = 1000;
+int currentStage = 0;
 
 void setup() {
   pinMode(defuse, INPUT);
-  pinMode(redLed1, OUTPUT);
-  pinMode(redLed2, OUTPUT);
-  pinMode(amberLed1, OUTPUT);
-  pinMode(amberLed2, OUTPUT);
-  pinMode(greenLed, OUTPUT);
+  pinMode(ledPins[0], OUTPUT);
+  pinMode(ledPins[1], OUTPUT);
+  pinMode(ledPins[2], OUTPUT);
+  pinMode(ledPins[3], OUTPUT);
+  pinMode(ledPins[4], OUTPUT);
 }
 
 void loop() {
+
   if(digitalRead(defuse) == HIGH) {
-   digitalWrite(redLed1, HIGH);
-   delay(delayTime);
-   digitalWrite(redLed2, HIGH);
-   delay(delayTime);
-   digitalWrite(amberLed1, HIGH);
-   delay(delayTime);
-   digitalWrite(amberLed2, HIGH);
-   delay(delayTime);
-   digitalWrite(greenLed, HIGH);;
-   delay(200);
-   flashledFunction();
+    if(currentStage < 5) {
+      setProgress(currentStage ++);
+      delay(delayTime);
+    }
+    else {
+      flashAll(5, delayTime / 2);
+    }
   }
   else {
-      offledFunction();
+    currentStage = 0;
+    setProgress(0);
+  }
+  
+}
+
+void flashAll(int times, int _delayTime) {
+  for(int i = 0; i < times; i ++) {
+    setProgress(5);
+    delay(_delayTime);
+    setProgress(0);
+    delay(_delayTime);
+  }
+}
+
+void setProgress(int stage) { // setProgress(0) turns all off, setProgress(5) turns all on
+  for(int i = 0; i < 5; i ++) {
+    if(i < stage) {
+      digitalWrite(ledPins[i], HIGH);
+    }
+    else {
+      digitalWrite(ledPins[i], LOW);
+    }
   }
 }
