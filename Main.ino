@@ -1,13 +1,11 @@
-int redLed1=13;
-int redLed2=12;
-int amberLed1=11;
-int amberLed2=10;
-int greenLed=9;
-int defuse=0;
-int delayTime=1000;
+int redLed1 = 13;
+int redLed2 = 12;
+int amberLed1 = 11;
+int amberLed2 = 10;
+int greenLed = 9;
+int defuse = 0;
+int delayTime = 1000;
 
-
-   
 void setup() {
   pinMode(defuse, INPUT);
   pinMode(redLed1, OUTPUT);
@@ -15,8 +13,6 @@ void setup() {
   pinMode(amberLed1, OUTPUT);
   pinMode(amberLed2, OUTPUT);
   pinMode(greenLed, OUTPUT);
-  
-  
 }
 
 void loop() {
@@ -30,12 +26,10 @@ void loop() {
    digitalWrite(amberLed2, HIGH);
    delay(delayTime);
    digitalWrite(greenLed, HIGH);;
-   delay(200);  
+   delay(200);
    flashledFunction();
-  
   }
   else {
       offledFunction();
   }
-  }
-
+}
